@@ -1,0 +1,185 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #000;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+}
+
+/* Header & Nav */
+header {
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    position: sticky;
+    top: 0;
+    border-bottom: 1px solid #333;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ff0000;
+    letter-spacing: 2px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #ff0000;
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.highlight {
+    color: #ff0000;
+}
+
+p {
+    font-size: 1.2rem;
+    color: #ccc;
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 30px;
+    background: transparent;
+    border: 2px solid #ff0000;
+    color: #ff0000;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn:hover {
+    background: #ff0000;
+    color: #000;
+    box-shadow: 0 0 15px #ff0000;
+}
+
+/* Sections */
+.section {
+    padding: 100px 50px;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    border-bottom: 2px solid #ff0000;
+    padding-bottom: 10px;
+}
+
+/* Grid for Projects */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.card {
+    background: rgba(20, 20, 20, 0.8);
+    border: 1px solid #333;
+    padding: 30px;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    border-color: #ff0000;
+}
+
+.card h3 {
+    margin-bottom: 15px;
+    color: #ff0000;
+}
+
+/* Footer */
+footer {
+    padding: 20px;
+    text-align: center;
+    background: #000;
+    border-top: 1px solid #333;
+    color: #666;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    header {
+        padding: 20px;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav ul {
+        gap: 15px;
+        font-size: 0.9rem;
+    }
+
+    .section {
+        padding: 60px 20px;
+    }
+}

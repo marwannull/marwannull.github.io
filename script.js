@@ -218,3 +218,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
 init();
 animate();
+
+document.addEventListener('DOMContentLoaded', () => {
+    const fadeElements = document.querySelectorAll('.fade-in');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    fadeElements.forEach(element => {
+        observer.observe(element);
+    });
+
+    const liveViewersElement = document.getElementById('live-viewers');
+    const totalViewsElement = document.getElementById('total-views');
+
+    function updateLiveViewers() {
+        const viewers = Math.floor(Math.random() * (50 - 10 + 1)) + 10;
+        liveViewersElement.textContent = viewers;
+    }
+    updateLiveViewers();
+    setInterval(updateLiveViewers, 5000);
+
+    let totalViews = localStorage.getItem('totalViews');
+    if (!totalViews) {
+        totalViews = 1250;
+    } else {
+        totalViews = parseInt(totalViews) + 1;
+    }
+    localStorage.setItem('totalViews', totalViews);
+    totalViewsElement.textContent = totalViews.toLocaleString();
+});

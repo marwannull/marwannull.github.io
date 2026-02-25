@@ -1,8 +1,15 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+function resizeCanvas() {
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    ctx.scale(dpr, dpr);
+    canvas.style.width = window.innerWidth + 'px';
+    canvas.style.height = window.innerHeight + 'px';
+}
+resizeCanvas();
 
 let particlesArray;
 let gradientParticlesArray;
@@ -45,17 +52,16 @@ class Particle {
     }
 
     update() {
-        if (this.x > canvas.width || this.x < 0) {
+        if (this.x > window.innerWidth || this.x < 0) {
             this.directionX = -this.directionX;
         }
-        if (this.y > canvas.height || this.y < 0) {
+        if (this.y > window.innerHeight || this.y < 0) {
             this.directionY = -this.directionY;
         }
 
         let dx = mouse.x - this.x;
         let dy = mouse.y - this.y;
-        let distance = Math.sqrt(dx * dx + dy * dy);
-
+        
         this.x += this.directionX;
         this.y += this.directionY;
         
@@ -63,35 +69,45 @@ class Particle {
     }
 }
 
-class GradientParticle {
-    constructor(x, y, directionX, directionY, size) {
-        this.x = x;
-        this.y = y;
-        this.directionX = directionX;
-        this.directionY = directionY;
-        this.size = size;
+class RisingParticle {
+    constructor() {
+        this.x = Math.random() * window.innerWidth;
+        this.y = window.innerHeight + Math.random() * 100;
+        this.size = Math.random() * 5 + 1;
+        this.speedY = Math.random() * 0.5 + 0.2;
+        this.opacity = 0;
+        this.maxOpacity = Math.random() * 0.3 + 0.1;
+        this.fadeState = 'in';
     }
 
     draw() {
         ctx.beginPath();
-        let gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
-        gradient.addColorStop(0, 'rgba(255, 0, 0, 0.6)');
-        gradient.addColorStop(1, 'rgba(255, 0, 0, 0)');
-        ctx.fillStyle = gradient;
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+        ctx.fillStyle = 'rgba(255, 0, 0, ' + this.opacity + ')';
         ctx.fill();
     }
 
     update() {
-        if (this.x > canvas.width || this.x < 0) {
-            this.directionX = -this.directionX;
-        }
-        if (this.y > canvas.height || this.y < 0) {
-            this.directionY = -this.directionY;
+        this.y -= this.speedY;
+
+        if (this.fadeState === 'in') {
+            if (this.opacity < this.maxOpacity) {
+                this.opacity += 0.01;
+            } else {
+                this.fadeState = 'out';
+            }
+        } else {
+            if (this.y < window.innerHeight * 0.3) {
+                this.opacity -= 0.005;
+            }
         }
 
-        this.x += this.directionX;
-        this.y += this.directionY;
+        if (this.y < -50 || (this.fadeState === 'out' && this.opacity <= 0)) {
+            this.y = window.innerHeight + Math.random() * 100;
+            this.x = Math.random() * window.innerWidth;
+            this.opacity = 0;
+            this.fadeState = 'in';
+        }
 
         this.draw();
     }
@@ -101,11 +117,11 @@ function init() {
     particlesArray = [];
     gradientParticlesArray = [];
 
-    let numberOfParticles = (canvas.height * canvas.width) / 9000;
+    let numberOfParticles = (window.innerHeight * window.innerWidth) / 9000;
     for (let i = 0; i < numberOfParticles; i++) {
         let size = (Math.random() * 2) + 1;
-        let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
-        let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+        let x = (Math.random() * ((window.innerWidth - size * 2) - (size * 2)) + size * 2);
+        let y = (Math.random() * ((window.innerHeight - size * 2) - (size * 2)) + size * 2);
         let directionX = (Math.random() * 0.4) - 0.2;
         let directionY = (Math.random() * 0.4) - 0.2;
         let color = '#ffffff';
@@ -113,15 +129,9 @@ function init() {
         particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
     }
 
-    let numberOfGradientParticles = 15;
-    for (let i = 0; i < numberOfGradientParticles; i++) {
-        let size = (Math.random() * 100) + 50;
-        let x = Math.random() * innerWidth;
-        let y = Math.random() * innerHeight;
-        let directionX = (Math.random() * 0.2) - 0.1;
-        let directionY = (Math.random() * 0.2) - 0.1;
-
-        gradientParticlesArray.push(new GradientParticle(x, y, directionX, directionY, size));
+    let numberOfRisingParticles = 50;
+    for (let i = 0; i < numberOfRisingParticles; i++) {
+        gradientParticlesArray.push(new RisingParticle());
     }
 }
 
@@ -146,7 +156,7 @@ function connect() {
 
 function animate() {
     requestAnimationFrame(animate);
-    ctx.clearRect(0, 0, innerWidth, innerHeight);
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
     for (let i = 0; i < gradientParticlesArray.length; i++) {
         gradientParticlesArray[i].update();
@@ -159,10 +169,55 @@ function animate() {
 }
 
 window.addEventListener('resize', function() {
-    canvas.width = innerWidth;
-    canvas.height = innerHeight;
+    resizeCanvas();
     mouse.radius = 150;
     init();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const backToTopBtn = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+        const scrollToTop = () => {
+            const c = document.documentElement.scrollTop || document.body.scrollTop;
+            if (c > 0) {
+                window.requestAnimationFrame(scrollToTop);
+                window.scrollTo(0, c - c / 20);
+            }
+        };
+        scrollToTop();
+    });
+
+    const faviconImg = new Image();
+    faviconImg.crossOrigin = "Anonymous";
+    faviconImg.src = "https://github.com/marwannull.png";
+    faviconImg.onload = () => {
+        const favCanvas = document.createElement('canvas');
+        favCanvas.width = 64;
+        favCanvas.height = 64;
+        const favCtx = favCanvas.getContext('2d');
+        
+        favCtx.beginPath();
+        favCtx.arc(32, 32, 32, 0, 2 * Math.PI);
+        favCtx.closePath();
+        favCtx.clip();
+        
+        favCtx.drawImage(faviconImg, 0, 0, 64, 64);
+        
+        const link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+        link.type = 'image/png';
+        link.rel = 'icon';
+        link.href = favCanvas.toDataURL();
+        document.getElementsByTagName('head')[0].appendChild(link);
+    };
 });
 
 init();

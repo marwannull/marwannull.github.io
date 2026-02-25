@@ -7,6 +7,7 @@
     <link rel="icon" href="https://github.com/marwannull.png" type="image/png">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <canvas id="canvas"></canvas>
@@ -30,12 +31,99 @@
             <a href="#projects" class="btn">View Projects</a>
         </section>
 
-        <section id="about" class="section">
+        <section id="about" class="section fade-in">
             <h2>About Me</h2>
             <p>I'm a Java developer specializing in high-performance Minecraft plugins. With 3 years of experience and 1 plugins published on BuiltByBit, I focus on creating clean, efficient code that server owners love. My plugins are designed to be lightweight, configurable, and compatible with the latest Minecraft versions.</p>
         </section>
 
-        <section id="projects" class="section">
+        <section id="skills" class="section fade-in">
+            <h2>Skills</h2>
+            <div class="skills-container">
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <i class="fab fa-java skill-icon" style="color: #f89820;"></i>
+                        <span class="skill-name">Java</span>
+                        <span class="skill-percent">100%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%; background-color: #f89820;"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <i class="fab fa-python skill-icon" style="color: #3776ab;"></i>
+                        <span class="skill-name">Python</span>
+                        <span class="skill-percent">100%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%; background-color: #3776ab;"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <i class="fab fa-js skill-icon" style="color: #f7df1e;"></i>
+                        <span class="skill-name">JavaScript</span>
+                        <span class="skill-percent">100%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%; background-color: #f7df1e;"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <i class="fab fa-html5 skill-icon" style="color: #e34f26;"></i>
+                        <span class="skill-name">HTML</span>
+                        <span class="skill-percent">100%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%; background-color: #e34f26;"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <i class="fab fa-css3-alt skill-icon" style="color: #1572b6;"></i>
+                        <span class="skill-name">CSS</span>
+                        <span class="skill-percent">100%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%; background-color: #1572b6;"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <i class="fas fa-leaf skill-icon" style="color: #6db33f;"></i>
+                        <span class="skill-name">Spring Boot</span>
+                        <span class="skill-percent">86%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 86%; background-color: #6db33f;"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <i class="fas fa-database skill-icon" style="color: #00758f;"></i>
+                        <span class="skill-name">SQL</span>
+                        <span class="skill-percent">68%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 68%; background-color: #00758f;"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <i class="devicon-csharp-plain skill-icon" style="font-family: 'Font Awesome 6 Brands', sans-serif; color: #9b4993;">C#</i>
+                        <i class="fas fa-code skill-icon" style="color: #9b4993;"></i>
+                        <span class="skill-name">C#</span>
+                        <span class="skill-percent">32%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 32%; background-color: #9b4993;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section fade-in">
             <h2>Projects</h2>
             <div class="grid">
                 <div class="card">
@@ -77,6 +165,16 @@
         </section>
 
         <footer>
+            <div class="footer-stats">
+                <div class="stat-item">
+                    <i class="fas fa-eye"></i>
+                    <span id="live-viewers">0</span> Live Viewers
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <span id="total-views">0</span> Total Views
+                </div>
+            </div>
             <p>Made with ❤️ by marwannull. All rights reserved.</p>
         </footer>
     </div>
@@ -84,6 +182,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
-
-

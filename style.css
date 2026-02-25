@@ -30,7 +30,6 @@ canvas {
     z-index: 1;
 }
 
-/* Header & Nav */
 header {
     padding: 20px 50px;
     display: flex;
@@ -68,7 +67,6 @@ nav a:hover {
     color: #ff0000;
 }
 
-/* Hero Section */
 .hero {
     height: 100vh;
     display: flex;
@@ -143,10 +141,10 @@ h2 {
     padding-bottom: 10px;
 }
 
-/* Grid for Projects */
 .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 30px;
     width: 100%;
     max-width: 1200px;
@@ -157,6 +155,7 @@ h2 {
     border: 1px solid #333;
     padding: 30px;
     transition: transform 0.3s, border-color 0.3s;
+    flex: 0 1 300px;
 }
 
 .card:hover {
@@ -169,16 +168,48 @@ h2 {
     color: #ff0000;
 }
 
-/* Footer */
 footer {
     padding: 20px;
     text-align: center;
-    background: #000;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
     color: #666;
 }
 
-/* Responsive */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border: 2px solid #ff0000;
+    border-radius: 50%;
+    color: #ff0000;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease;
+    z-index: 1000;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background-color: #ff0000;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+}
+
 @media (max-width: 768px) {
     h1 {
         font-size: 2.5rem;

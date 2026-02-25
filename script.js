@@ -192,40 +192,6 @@ window.addEventListener('resize', function() {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const backToTopBtn = document.getElementById('backToTop');
-    
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            backToTopBtn.classList.add('visible');
-        } else {
-            backToTopBtn.classList.remove('visible');
-        }
-    });
-
-    backToTopBtn.addEventListener('click', () => {
-        const startPosition = window.pageYOffset;
-        const targetPosition = 0;
-        const distance = targetPosition - startPosition;
-        const duration = 800;
-        let start = null;
-
-        function step(timestamp) {
-            if (!start) start = timestamp;
-            const progress = timestamp - start;
-            const percentage = Math.min(progress / duration, 1);
-            
-            const ease = 1 - Math.pow(1 - percentage, 3);
-            
-            window.scrollTo(0, startPosition + distance * ease);
-
-            if (progress < duration) {
-                requestAnimationFrame(step);
-            }
-        }
-        
-        requestAnimationFrame(step);
-    });
-
     const faviconImg = new Image();
     faviconImg.crossOrigin = "Anonymous";
     faviconImg.src = "https://github.com/marwannull.png";

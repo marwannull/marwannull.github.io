@@ -1,19 +1,40 @@
+/* Global Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     user-select: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 html {
     scroll-behavior: smooth;
 }
 
+img, canvas, svg {
+    image-rendering: -webkit-optimize-contrast; /* Webkit */
+    image-rendering: crisp-edges;
+}
+
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: #000;
+    background-color: #050505; /* Deep dark background */
     color: #fff;
     overflow-x: hidden;
+}
+
+/* End Portal Effect Background */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, #12051d 0%, #020103 100%);
+    z-index: -2;
+    pointer-events: none;
 }
 
 canvas {
@@ -30,24 +51,25 @@ canvas {
     z-index: 1;
 }
 
+/* Header & Nav */
 header {
     padding: 20px 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(5px);
+    background: rgba(10, 10, 10, 0.6);
+    backdrop-filter: blur(10px);
     position: sticky;
     top: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     z-index: 100;
 }
 
 .logo {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
-    color: #ff0000;
-    letter-spacing: 2px;
+    color: #fff;
+    letter-spacing: 1px;
 }
 
 nav ul {
@@ -58,15 +80,17 @@ nav ul {
 
 nav a {
     text-decoration: none;
-    color: #fff;
+    color: #aaa;
     font-weight: 500;
     transition: color 0.3s;
+    font-size: 0.9rem;
 }
 
 nav a:hover {
-    color: #ff0000;
+    color: #fff;
 }
 
+/* Hero Section */
 .hero {
     height: 100vh;
     display: flex;
@@ -97,8 +121,8 @@ h1 {
 }
 
 p {
-    font-size: 1.2rem;
-    color: #ccc;
+    font-size: 1.1rem;
+    color: #888;
     max-width: 600px;
     line-height: 1.6;
 }
@@ -106,21 +130,20 @@ p {
 .btn {
     display: inline-block;
     margin-top: 30px;
-    padding: 12px 30px;
+    padding: 10px 25px;
     background: transparent;
-    border: 2px solid #ff0000;
+    border: 1px solid #ff0000;
     color: #ff0000;
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 600;
     transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    border-radius: 5px;
+    font-size: 0.9rem;
 }
 
 .btn:hover {
-    background: #ff0000;
-    color: #fff;
-    box-shadow: 0 0 15px #ff0000;
+    background: rgba(255, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
 }
 
 /* Sections */
@@ -135,68 +158,114 @@ p {
 }
 
 h2 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     margin-bottom: 50px;
-    border-bottom: 2px solid #ff0000;
-    padding-bottom: 10px;
+    color: #fff;
 }
 
+/* Grid for Projects */
 .grid {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 20px;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1000px;
 }
 
+/* Bento Grid Card Style */
 .card {
-    background: rgba(20, 20, 20, 0.8);
-    border: 1px solid #333;
+    background: #0d0d11;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
     padding: 30px;
-    transition: transform 0.3s, border-color 0.3s;
-    flex: 0 1 300px;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    flex: 0 1 350px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .card:hover {
-    transform: translateY(-10px);
-    border-color: #ff0000;
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+.card-icon {
+    background: #1a1a20;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .card h3 {
-    margin-bottom: 15px;
-    color: #ff0000;
+    margin-bottom: 12px;
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 700;
 }
 
+.card p {
+    color: #a0a0a0;
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.card-meta {
+    margin-top: auto;
+    font-size: 0.85rem;
+    color: #666;
+    font-weight: 500;
+}
+
+/* Footer */
 footer {
-    padding: 20px;
-    text-align: center;
-    background: rgba(0, 0, 0, 0.8);
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(10px);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     color: #666;
+    font-size: 0.9rem;
+    text-align: center;
+    width: 100%;
 }
 
+/* Back to Top Button */
 .back-to-top {
     position: fixed;
     bottom: 30px;
     right: 30px;
     width: 50px;
     height: 50px;
-    background-color: transparent;
-    border: 2px solid #ff0000;
+    background-color: rgba(20, 20, 20, 0.9);
+    border: 1px solid #ff0000;
     border-radius: 50%;
     color: #ff0000;
-    font-size: 24px;
+    font-size: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.5s ease;
+    transition: all 0.3s ease;
     z-index: 1000;
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
 }
 
 .back-to-top.visible {
@@ -207,9 +276,10 @@ footer {
 .back-to-top:hover {
     background-color: #ff0000;
     color: #fff;
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
 }
 
+/* Responsive */
 @media (max-width: 768px) {
     h1 {
         font-size: 2.5rem;
@@ -222,7 +292,7 @@ footer {
     }
 
     nav ul {
-        gap: 15px;
+        gap: 20px;
         font-size: 0.9rem;
     }
 

@@ -1,6 +1,7 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
+// High DPI Canvas Setup
 function resizeCanvas() {
     const dpr = window.devicePixelRatio || 1;
     canvas.width = window.innerWidth * dpr;
@@ -62,6 +63,7 @@ class Particle {
         let dx = mouse.x - this.x;
         let dy = mouse.y - this.y;
         
+        // Interaction logic
         this.x += this.directionX;
         this.y += this.directionY;
         
@@ -73,40 +75,61 @@ class RisingParticle {
     constructor() {
         this.x = Math.random() * window.innerWidth;
         this.y = window.innerHeight + Math.random() * 100;
-        this.size = Math.random() * 5 + 1;
-        this.speedY = Math.random() * 0.5 + 0.2;
+        this.size = Math.random() * 2 + 0.5; // Smaller size
+        this.speedY = Math.random() * 0.8 + 0.3; // Slightly faster
+        this.color1 = this.getRandomColor();
+        this.color2 = this.getRandomColor();
         this.opacity = 0;
-        this.maxOpacity = Math.random() * 0.3 + 0.1;
-        this.fadeState = 'in';
+        this.maxOpacity = Math.random() * 0.5 + 0.2; 
+        this.fadeState = 'in'; 
+    }
+
+    getRandomColor() {
+        const colors = [
+            '255, 50, 50', // Red
+            '180, 50, 255', // Purple
+            '100, 100, 255'  // Blueish
+        ];
+        return colors[Math.floor(Math.random() * colors.length)];
     }
 
     draw() {
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-        ctx.fillStyle = 'rgba(255, 0, 0, ' + this.opacity + ')';
+        // Gradient effect for particle
+        let gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
+        gradient.addColorStop(0, 'rgba(' + this.color1 + ',' + this.opacity + ')');
+        gradient.addColorStop(1, 'rgba(' + this.color2 + ', 0)');
+        
+        ctx.fillStyle = gradient;
+        ctx.arc(this.x, this.y, this.size * 2, 0, Math.PI * 2, false); // Draw slightly larger to see gradient
         ctx.fill();
     }
 
     update() {
         this.y -= this.speedY;
 
+        // Fade in
         if (this.fadeState === 'in') {
             if (this.opacity < this.maxOpacity) {
                 this.opacity += 0.01;
             } else {
                 this.fadeState = 'out';
             }
-        } else {
-            if (this.y < window.innerHeight * 0.3) {
-                this.opacity -= 0.005;
-            }
+        } 
+        
+        // Fade out as it goes up
+        if (this.y < window.innerHeight * 0.5) {
+             this.opacity -= 0.003;
         }
 
-        if (this.y < -50 || (this.fadeState === 'out' && this.opacity <= 0)) {
+        // Reset
+        if (this.y < -50 || this.opacity <= 0) {
             this.y = window.innerHeight + Math.random() * 100;
             this.x = Math.random() * window.innerWidth;
             this.opacity = 0;
             this.fadeState = 'in';
+            this.color1 = this.getRandomColor();
+            this.color2 = this.getRandomColor();
         }
 
         this.draw();
@@ -117,19 +140,22 @@ function init() {
     particlesArray = [];
     gradientParticlesArray = [];
 
-    let numberOfParticles = (window.innerHeight * window.innerWidth) / 9000;
+    // Fewer white particles, grey-white color
+    // Reduced density significantly
+    let numberOfParticles = (window.innerHeight * window.innerWidth) / 25000; 
     for (let i = 0; i < numberOfParticles; i++) {
-        let size = (Math.random() * 2) + 1;
+        let size = (Math.random() * 1) + 0.5; // Smaller: 0.5 to 1.5
         let x = (Math.random() * ((window.innerWidth - size * 2) - (size * 2)) + size * 2);
         let y = (Math.random() * ((window.innerHeight - size * 2) - (size * 2)) + size * 2);
-        let directionX = (Math.random() * 0.4) - 0.2;
-        let directionY = (Math.random() * 0.4) - 0.2;
-        let color = '#ffffff';
+        let directionX = (Math.random() * 0.2) - 0.1; 
+        let directionY = (Math.random() * 0.2) - 0.1;
+        let color = 'rgba(150, 150, 150, 0.2)'; // More grey and transparent
 
         particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
     }
 
-    let numberOfRisingParticles = 50;
+    // Gradient rising particles
+    let numberOfRisingParticles = 20; // Reduced from 30
     for (let i = 0; i < numberOfRisingParticles; i++) {
         gradientParticlesArray.push(new RisingParticle());
     }
@@ -144,7 +170,7 @@ function connect() {
 
         if (distance_mouse < mouse.radius) {
             opacityValue = 1 - (distance_mouse / mouse.radius);
-            ctx.strokeStyle = 'rgba(255, 0, 0,' + opacityValue + ')';
+            ctx.strokeStyle = 'rgba(255, 0, 0,' + (opacityValue * 0.5) + ')'; // Lower opacity line
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
@@ -174,9 +200,11 @@ window.addEventListener('resize', function() {
     init();
 });
 
+// Back to Top & Circular Favicon Logic
 document.addEventListener('DOMContentLoaded', () => {
     const backToTopBtn = document.getElementById('backToTop');
     
+    // Scroll Logic
     window.addEventListener('scroll', () => {
         if (window.scrollY > 300) {
             backToTopBtn.classList.add('visible');
@@ -186,16 +214,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     backToTopBtn.addEventListener('click', () => {
-        const scrollToTop = () => {
-            const c = document.documentElement.scrollTop || document.body.scrollTop;
-            if (c > 0) {
-                window.requestAnimationFrame(scrollToTop);
-                window.scrollTo(0, c - c / 20);
+        // Custom smooth scroll - faster and prevents locking
+        const startPosition = window.pageYOffset;
+        const targetPosition = 0;
+        const distance = targetPosition - startPosition;
+        const duration = 800; // 0.8s for the whole scroll
+        let start = null;
+
+        function step(timestamp) {
+            if (!start) start = timestamp;
+            const progress = timestamp - start;
+            const percentage = Math.min(progress / duration, 1);
+            
+            // Ease out cubic function
+            const ease = 1 - Math.pow(1 - percentage, 3);
+            
+            window.scrollTo(0, startPosition + distance * ease);
+
+            if (progress < duration) {
+                requestAnimationFrame(step);
             }
-        };
-        scrollToTop();
+        }
+        
+        requestAnimationFrame(step);
     });
 
+    // Circular Favicon
     const faviconImg = new Image();
     faviconImg.crossOrigin = "Anonymous";
     faviconImg.src = "https://github.com/marwannull.png";

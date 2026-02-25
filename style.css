@@ -80,13 +80,13 @@ nav a:hover {
 }
 
 .avatar {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
-    border: 3px solid #ff0000;
+    border: 2px solid #ff0000;
     margin-bottom: 20px;
     object-fit: cover;
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
 }
 
 h1 {

@@ -75,7 +75,7 @@ class GradientParticle {
     draw() {
         ctx.beginPath();
         let gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
-        gradient.addColorStop(0, 'rgba(255, 0, 0, 0.2)');
+        gradient.addColorStop(0, 'rgba(255, 0, 0, 0.6)');
         gradient.addColorStop(1, 'rgba(255, 0, 0, 0)');
         ctx.fillStyle = gradient;
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);

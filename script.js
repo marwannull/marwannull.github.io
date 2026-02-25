@@ -220,7 +220,7 @@ init();
 animate();
 
 document.addEventListener('DOMContentLoaded', () => {
-    const fadeElements = document.querySelectorAll('.fade-in');
+    const fadeElements = document.querySelectorAll('.fade-in, .scroll-animate');
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -236,16 +236,8 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(element);
     });
 
-    const liveViewersElement = document.getElementById('live-viewers');
-    const totalViewsElement = document.getElementById('total-views');
-
-    function updateLiveViewers() {
-        const viewers = Math.floor(Math.random() * (50 - 10 + 1)) + 10;
-        liveViewersElement.textContent = viewers;
-    }
-    updateLiveViewers();
-    setInterval(updateLiveViewers, 5000);
-
+    const headerViewersElement = document.getElementById('header-viewers');
+    
     let totalViews = localStorage.getItem('totalViews');
     if (!totalViews) {
         totalViews = 1250;
@@ -253,5 +245,6 @@ document.addEventListener('DOMContentLoaded', () => {
         totalViews = parseInt(totalViews) + 1;
     }
     localStorage.setItem('totalViews', totalViews);
-    totalViewsElement.textContent = totalViews.toLocaleString();
+    
+    headerViewersElement.textContent = totalViews.toLocaleString();
 });

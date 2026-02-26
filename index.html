@@ -3,119 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - marwannull</title>
+    <title>marwannull ── Portfolio</title>
     <link rel="icon" href="https://github.com/marwannull.png" type="image/png">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <canvas id="canvas"></canvas>
     
     <div class="content">
         <header>
             <div class="logo">marwannull</div>
             <nav>
                 <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About Me</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#about"><i class="fas fa-user"></i> About Me</a></li>
+                    <li><a href="#projects"><i class="fas fa-code"></i> Projects</a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
                 </ul>
             </nav>
+            <div class="header-controls">
+                <div class="language-switch">
+                    <span class="lang-option active" data-lang="en">EN</span>
+                    <span class="separator">/</span>
+                    <span class="lang-option" data-lang="es">ES</span>
+                </div>
+                <button id="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-adjust"></i>
+                </button>
+            </div>
         </header>
 
         <section id="home" class="hero">
             <img src="https://github.com/marwannull.png" alt="Avatar" class="avatar">
-            <h1>Hi, I'm Marwan - <span class="highlight">Java Developer</span></h1>
-            <p>I build ready-to-use plugins that improve server performance and player experience.</p>
-            <a href="#projects" class="btn">View Projects</a>
-        </section>
-
-        <section id="about" class="section fade-in">
-            <h2>About Me</h2>
-            <p>I'm a Java developer specializing in high-performance Minecraft plugins. With 3 years of experience and 1 plugins published on BuiltByBit, I focus on creating clean, efficient code that server owners love. My plugins are designed to be lightweight, configurable, and compatible with the latest Minecraft versions.</p>
-        </section>
-
-        <section id="skills" class="section fade-in">
-            <h2>Skills</h2>
-            <div class="skills-container">
-                <div class="skill-card">
-                    <div class="skill-header">
-                        <i class="fab fa-java skill-icon" style="color: #f89820;"></i>
-                        <span class="skill-name">Java</span>
-                        <span class="skill-percent">100%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 100%; background-color: #f89820;"></div>
-                    </div>
+            <h1 data-en="Hi, I'm Marwan" data-es="Hola, soy Marwan">Hi, I'm Marwan - <span class="highlight">Java Developer</span></h1>
+            <p data-en="I build ready-to-use plugins that improve server performance and player experience." data-es="Creo plugins listos para usar que mejoran el rendimiento del servidor y la experiencia del jugador.">I build ready-to-use plugins that improve server performance and player experience.</p>
+            <a href="#projects" class="btn" data-en="View Projects" data-es="Ver Proyectos">View Projects</a>
+            <div class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-header">
-                        <i class="fab fa-python skill-icon" style="color: #ffd43b;"></i>
-                        <span class="skill-name">Python</span>
-                        <span class="skill-percent">100%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 100%; background-color: #ffd43b;"></div>
-                    </div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-header">
-                        <i class="fab fa-js skill-icon" style="color: #f7df1e;"></i>
-                        <span class="skill-name">JavaScript</span>
-                        <span class="skill-percent">100%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 100%; background-color: #f7df1e;"></div>
-                    </div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-header">
-                        <i class="fab fa-html5 skill-icon" style="color: #e34f26;"></i>
-                        <span class="skill-name">HTML</span>
-                        <span class="skill-percent">100%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 100%; background-color: #e34f26;"></div>
-                    </div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-header">
-                        <i class="fab fa-css3-alt skill-icon" style="color: #1572b6;"></i>
-                        <span class="skill-name">CSS</span>
-                        <span class="skill-percent">100%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 100%; background-color: #1572b6;"></div>
-                    </div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-header">
-                        <i class="fas fa-leaf skill-icon" style="color: #6db33f;"></i>
-                        <span class="skill-name">Spring Boot</span>
-                        <span class="skill-percent">86%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 86%; background-color: #6db33f;"></div>
-                    </div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-header">
-                        <i class="fas fa-database skill-icon" style="color: #00758f;"></i>
-                        <span class="skill-name">SQL</span>
-                        <span class="skill-percent">68%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 68%; background-color: #00758f;"></div>
-                    </div>
+                <div class="arrow">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
             </div>
         </section>
 
+        <section id="about" class="section fade-in">
+            <h2 data-en="About Me" data-es="Sobre Mí">About Me</h2>
+            <p data-en="I'm a Java developer specializing in high-performance Minecraft plugins. With 3 years of experience and 1 plugins published on BuiltByBit, I focus on creating clean, efficient code that server owners love. My plugins are designed to be lightweight, configurable, and compatible with the latest Minecraft versions." data-es="Soy un desarrollador de Java especializado en plugins de Minecraft de alto rendimiento. Con 3 años de experiencia y 1 plugin publicado en BuiltByBit, me enfoco en crear código limpio y eficiente que a los dueños de servidores les encanta. Mis plugins están diseñados para ser ligeros, configurables y compatibles con las últimas versiones de Minecraft.">I'm a Java developer specializing in high-performance Minecraft plugins. With 3 years of experience and 1 plugins published on BuiltByBit, I focus on creating clean, efficient code that server owners love. My plugins are designed to be lightweight, configurable, and compatible with the latest Minecraft versions.</p>
+        </section>
+
         <section id="projects" class="section fade-in">
-            <h2>Projects</h2>
+            <h2 data-en="Projects" data-es="Proyectos">Projects</h2>
             <div class="grid">
                 <div class="card scroll-animate">
                     <div class="card-icon">
@@ -127,10 +68,10 @@
                         </svg>
                     </div>
                     <h3>BlazeCord</h3>
-                    <p>A high-performance proxy designed to enhance network security and performance.</p>
+                    <p data-en="A high-performance proxy designed to enhance network security and performance." data-es="Un proxy de alto rendimiento diseñado para mejorar la seguridad y el rendimiento de la red.">A high-performance proxy designed to enhance network security and performance.</p>
                     <div class="card-footer-group">
-                        <div class="card-meta">On development</div>
-                        <a href="#" class="btn-small">Visit Plugin</a>
+                        <div class="card-meta" data-en="On development" data-es="En desarrollo">On development</div>
+                        <a href="#" class="btn-small open-modal" data-name="BlazeCord" data-spigot="#" data-modrinth="#" data-builtbybit="#" data-polymart="#" data-en="Visit Plugin" data-es="Visitar Plugin">Visit Plugin</a>
                     </div>
                 </div>
                 <div class="card scroll-animate">
@@ -140,24 +81,38 @@
                         </svg>
                     </div>
                     <h3>Kothar</h3>
-                    <p>The next-generation King of The Hill plugin.</p>
+                    <p data-en="The next-generation King of The Hill plugin." data-es="El plugin King of The Hill de próxima generación.">The next-generation King of The Hill plugin.</p>
                     <div class="card-footer-group">
                         <div class="card-meta">Version 1.0.2 • 1.21+</div>
-                        <a href="https://builtbybit.com/resources/kothar.94414/" class="btn-small">Visit Plugin</a>
+                        <a href="#" class="btn-small open-modal" data-name="Kothar" data-spigot="#" data-modrinth="#" data-builtbybit="https://builtbybit.com/resources/kothar.94414/" data-polymart="#" data-en="Visit Plugin" data-es="Visitar Plugin">Visit Plugin</a>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="contact" class="section">
-            <h2>Contact</h2>
-            <p>Stay updated on new plugins, get support, and connect with other people.</p>
-            <a href="https://discord.gg/BewvqAe3jb" class="btn">Join Discord</a>
+            <h2 data-en="Contact" data-es="Contacto">Contact</h2>
+            <p data-en="Stay updated on new plugins, get support, and connect with other people." data-es="Mantente actualizado sobre nuevos plugins, obtén soporte y conéctate con otras personas.">Stay updated on new plugins, get support, and connect with other people.</p>
+            <a href="https://discord.gg/BewvqAe3jb" class="btn" data-en="Join Discord" data-es="Unirse a Discord">Join Discord</a>
         </section>
 
         <footer>
-            <p>Made with ❤️ by marwannull. All rights reserved.</p>
+            <p>© 2026 marwannull — Arsenic Development</p>
         </footer>
+    </div>
+
+    <div id="pluginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 id="modalTitle">Plugin Name</h3>
+            <p data-en="Choose a platform to download:" data-es="Elige una plataforma para descargar:">Choose a platform to download:</p>
+            <div class="modal-buttons">
+                <a href="#" id="btn-spigot" target="_blank" class="platform-btn">SpigotMC</a>
+                <a href="#" id="btn-modrinth" target="_blank" class="platform-btn">Modrinth</a>
+                <a href="#" id="btn-builtbybit" target="_blank" class="platform-btn">BuiltByBit</a>
+                <a href="#" id="btn-polymart" target="_blank" class="platform-btn">Polymart</a>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>

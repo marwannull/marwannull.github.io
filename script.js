@@ -220,6 +220,7 @@ init();
 animate();
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Intersection Observer for Fade In Animations
     const fadeElements = document.querySelectorAll('.fade-in, .scroll-animate');
     
     const observer = new IntersectionObserver((entries) => {
@@ -236,15 +237,33 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(element);
     });
 
-    const headerViewersElement = document.getElementById('header-viewers');
-    
-    let totalViews = localStorage.getItem('totalViews');
-    if (!totalViews) {
-        totalViews = 1250;
-    } else {
-        totalViews = parseInt(totalViews) + 1;
-    }
-    localStorage.setItem('totalViews', totalViews);
-    
-    headerViewersElement.textContent = totalViews.toLocaleString();
+    const modal = document.getElementById('pluginModal');
+    const openModalBtns = document.querySelectorAll('.open-modal');
+    const closeModalBtn = document.querySelector('.close-modal');
+
+    openModalBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
+        });
+    });
+
+    closeModalBtn.addEventListener('click', () => {
+        modal.classList.remove('show');
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 300);
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target == modal) {
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+    });
 });

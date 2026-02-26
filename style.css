@@ -493,6 +493,8 @@ footer {
 .platform-icon {
     width: 24px;
     height: 24px;
+    min-width: 24px;
+    min-height: 24px;
     object-fit: contain;
 }
 
@@ -535,5 +537,4 @@ footer {
     header { padding: 15px 20px; flex-direction: column; gap: 15px; }
     nav ul { gap: 15px; font-size: 0.9rem; flex-wrap: wrap; justify-content: center; }
     .section { padding: 60px 20px; }
-    .modal-buttons { grid-template-columns: 1fr; }
 }

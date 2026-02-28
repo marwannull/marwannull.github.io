@@ -1,34 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('pluginModal');
-    const modalTitle = document.getElementById('modalTitle');
-    const btnSpigot = document.getElementById('btn-spigot');
-    const btnModrinth = document.getElementById('btn-modrinth');
-    const btnBuiltByBit = document.getElementById('btn-builtbybit');
-    const btnPolymart = document.getElementById('btn-polymart');
-    const closeBtn = document.querySelector('.close-modal');
-
-    document.querySelectorAll('.open-modal').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const name = btn.getAttribute('data-name');
-            const spigot = btn.getAttribute('data-spigot');
-            const modrinth = btn.getAttribute('data-modrinth');
-            const builtbybit = btn.getAttribute('data-builtbybit');
-            const polymart = btn.getAttribute('data-polymart');
-
-            modalTitle.textContent = name;
-            
-            setupBtn(btnSpigot, spigot);
-            setupBtn(btnModrinth, modrinth);
-            setupBtn(btnBuiltByBit, builtbybit);
-            setupBtn(btnPolymart, polymart);
-
-            modal.style.display = 'flex';
-            setTimeout(() => modal.classList.add('show'), 10);
-        });
-    });
 
     function setupBtn(element, url) {
+        if (!element) return;
         if (!url || url === '#') {
             element.style.display = 'none';
         } else {
@@ -37,68 +11,112 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    closeBtn.addEventListener('click', () => {
-        modal.classList.remove('show');
-        setTimeout(() => modal.style.display = 'none', 300);
-    });
+    if (modal) {
+        const modalTitle = document.getElementById('modalTitle');
+        const btnSpigot = document.getElementById('btn-spigot');
+        const btnModrinth = document.getElementById('btn-modrinth');
+        const btnBuiltByBit = document.getElementById('btn-builtbybit');
+        const btnPolymart = document.getElementById('btn-polymart');
+        const closeBtn = document.querySelector('.close-modal');
 
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) {
+        document.querySelectorAll('.open-modal').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const name = btn.getAttribute('data-name') || 'Plugin';
+                const spigot = btn.getAttribute('data-spigot');
+                const modrinth = btn.getAttribute('data-modrinth');
+                const builtbybit = btn.getAttribute('data-builtbybit');
+                const polymart = btn.getAttribute('data-polymart');
+
+                if (modalTitle) modalTitle.textContent = name;
+
+                setupBtn(btnSpigot, spigot);
+                setupBtn(btnModrinth, modrinth);
+                setupBtn(btnBuiltByBit, builtbybit);
+                setupBtn(btnPolymart, polymart);
+
+                modal.style.display = 'flex';
+                setTimeout(() => modal.classList.add('show'), 10);
+            });
+        });
+
+        const closeModal = () => {
             modal.classList.remove('show');
-            setTimeout(() => modal.style.display = 'none', 300);
+            setTimeout(() => (modal.style.display = 'none'), 300);
+        };
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeModal);
         }
-    });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('show')) {
+                closeModal();
+            }
+        });
+    }
 
     const langOptions = document.querySelectorAll('.lang-option');
-    let currentLang = 'en';
+    if (langOptions.length) {
+        let currentLang = 'en';
 
-    langOptions.forEach(option => {
-        option.addEventListener('click', () => {
-            const lang = option.getAttribute('data-lang');
-            setLanguage(lang);
-        });
-    });
+        function setLanguage(lang) {
+            currentLang = lang;
+            langOptions.forEach(opt => {
+                opt.classList.toggle('active', opt.getAttribute('data-lang') === lang);
+            });
 
-    function setLanguage(lang) {
-        currentLang = lang;
-        langOptions.forEach(opt => {
-            opt.classList.toggle('active', opt.getAttribute('data-lang') === lang);
+            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+                el.textContent = el.getAttribute('data-' + lang);
+            });
+        }
+
+        langOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const lang = option.getAttribute('data-lang');
+                if (lang) setLanguage(lang);
+            });
         });
 
-        document.querySelectorAll('[data-' + lang + ']').forEach(el => {
-            el.textContent = el.getAttribute('data-' + lang);
-        });
+        setLanguage(currentLang);
     }
 
     const themeToggle = document.getElementById('theme-toggle');
-    const icon = themeToggle.querySelector('i');
-    
-    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    let isDark = localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && systemDark);
-    
-    function updateTheme() {
-        if (isDark) {
-            document.body.classList.remove('light-mode');
-            icon.className = 'fas fa-sun'; 
-        } else {
-            document.body.classList.add('light-mode');
-            icon.className = 'fas fa-moon'; 
+    if (themeToggle) {
+        const icon = themeToggle.querySelector('i');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        let isDark = localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && systemDark);
+
+        function updateTheme() {
+            if (isDark) {
+                document.body.classList.remove('light-mode');
+                if (icon) icon.className = 'fas fa-sun';
+            } else {
+                document.body.classList.add('light-mode');
+                if (icon) icon.className = 'fas fa-moon';
+            }
         }
-    }
 
-    themeToggle.addEventListener('click', () => {
-        isDark = !isDark;
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        themeToggle.addEventListener('click', () => {
+            isDark = !isDark;
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateTheme();
+        });
+
+        if (localStorage.getItem('theme')) {
+            isDark = localStorage.getItem('theme') === 'dark';
+        } else {
+            isDark = systemDark;
+        }
         updateTheme();
-    });
-
-    if (localStorage.getItem('theme')) {
-        isDark = localStorage.getItem('theme') === 'dark';
-    } else {
-        isDark = systemDark;
     }
-    updateTheme();
-
 
     const observerOptions = {
         threshold: 0.1
@@ -124,6 +142,8 @@ document.addEventListener('DOMContentLoaded', () => {
         favCanvas.width = 64;
         favCanvas.height = 64;
         const favCtx = favCanvas.getContext('2d');
+        if (!favCtx) return;
+
         favCtx.beginPath();
         favCtx.arc(32, 32, 32, 0, 2 * Math.PI);
         favCtx.closePath();

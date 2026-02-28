@@ -3,531 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kothar Wiki</title>
-    <link rel="stylesheet" href="../style.css">
+    <title>marwannull ── Portfolio</title>
+    <link rel="icon" href="https://github.com/marwannull.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    
     <div class="content">
         <header>
-            <div class="logo">Kothar Wiki</div>
+            <div class="logo">marwannull</div>
             <nav>
                 <ul>
-                    <li><a href="../index.html#projects">Back</a></li>
+                    <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#about"><i class="fas fa-user"></i> About Me</a></li>
+                    <li><a href="#projects"><i class="fas fa-code"></i> Projects</a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
                 </ul>
             </nav>
             <div class="header-controls">
+                <div class="language-switch">
+                    <span class="lang-option active" data-lang="en">EN</span>
+                    <span class="separator">/</span>
+                    <span class="lang-option" data-lang="es">ES</span>
+                </div>
                 <button id="theme-toggle" aria-label="Toggle theme">
                     <i class="fas fa-adjust"></i>
                 </button>
             </div>
         </header>
 
-        <section class="section fade-in" style="padding-top: 140px;">
-            <h2>Kothar Wiki</h2>
-            <div class="projects-layout" style="grid-template-columns: 280px 1fr; max-width: 1200px; margin: 0 auto;">
-                <aside class="projects-right" style="order: 0;">
-                    <div class="docs-panel" style="position: sticky; top: 120px;">
-                        <h3>Index</h3>
-                        <div class="docs-group">
-                            <a class="docs-link" href="#home">Home</a>
-                            <a class="docs-link" href="#commands">Commands</a>
-                            <a class="docs-link" href="#permissions">Permissions</a>
-                            <a class="docs-link" href="#configuration">Configuration</a>
-                            <a class="docs-link" href="#koth-setup">KOTH Setup</a>
-                            <a class="docs-link" href="#koth-files-koths-folder">KOTH Files (koths folder)</a>
-                            <a class="docs-link" href="#economy-xp--coins">Economy (XP & Coins)</a>
-                            <a class="docs-link" href="#ranks">Ranks</a>
-                            <a class="docs-link" href="#shop">Shop</a>
-                            <a class="docs-link" href="#leaderboards">Leaderboards</a>
-                            <a class="docs-link" href="#displays-bossbarscoreboardhologramwaypoints">Displays</a>
-                            <a class="docs-link" href="#discord-webhook">Discord Webhook</a>
-                            <a class="docs-link" href="#update-system">Update System</a>
-                            <a class="docs-link" href="#placeholders">Placeholders</a>
-                            <a class="docs-link" href="#troubleshooting">Troubleshooting</a>
-                            <a class="docs-link" href="#developer-api">Developer API</a>
-                        </div>
-                    </div>
-                </aside>
-
-                <div class="projects-left" style="text-align: left;">
-                    <div class="docs-panel" style="position: static;">
-                        <h1 id="home">Home</h1>
-                        <h1>Kothar</h1>
-                        <p>Kothar is a <strong>King of the Hill (KOTH)</strong> plugin with:</p>
-                        <ul>
-                            <li>Multiple capture modes (including <strong>OVERLOAD</strong> multi-zone mode).</li>
-                            <li>Built-in <strong>XP + Coins</strong> economy (database-backed).</li>
-                            <li><strong>Ranks</strong> progression system based on XP.</li>
-                            <li>Leaderboards (<code>/kothar top</code>).</li>
-                            <li>BossBar / Scoreboard / Hologram displays.</li>
-                            <li>Shop GUI (<code>/kothar shop</code>) driven by configuration.</li>
-                            <li>Discord webhook notifications.</li>
-                            <li>Update checking/downloading from GitHub releases.</li>
-                        </ul>
-
-                        <hr>
-
-                        <h2>Requirements</h2>
-                        <ul>
-                            <li><strong>Server</strong>: Spigot/Paper (recommended)</li>
-                            <li><strong>Dependency</strong>:
-                                <ul>
-                                    <li><code>Apollo-Bukkit</code> (<strong>required</strong>, hard-depend)</li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                        <h2>Optional Integrations (softdepend)</h2>
-                        <ul>
-                            <li>PlaceholderAPI</li>
-                            <li>Vault</li>
-                            <li>ProtocolLib</li>
-                            <li>packetevents</li>
-                            <li>TAB</li>
-                            <li>Multiple team/clan plugins (ClansX, SimpleClans, UltimateClans, BetterTeams, Factions, etc.)</li>
-                        </ul>
-
-                        <hr>
-
-                        <h2>Quick Start</h2>
-                        <ol>
-                            <li>Install <code>Apollo-Bukkit</code>.</li>
-                            <li>Put <code>Kothar-&lt;version&gt;.jar</code> into <code>plugins/</code>.</li>
-                            <li>Start the server.</li>
-                            <li>Configure:
-                                <ul>
-                                    <li><code>plugins/Kothar/config.yml</code></li>
-                                    <li><code>plugins/Kothar/database.yml</code></li>
-                                </ul>
-                            </li>
-                            <li>Reload:
-                                <ul>
-                                    <li><code>/kothar reload</code></li>
-                                </ul>
-                            </li>
-                        </ol>
-
-                        <hr>
-
-                        <h2>First KOTH Setup (Classic)</h2>
-                        <ol>
-                            <li>Create the KOTH:
-                                <ul>
-                                    <li><code>/kothar create &lt;name&gt;</code></li>
-                                </ul>
-                            </li>
-                            <li>Select and save zone:
-                                <ul>
-                                    <li><code>/kothar select &lt;name&gt;</code></li>
-                                    <li>Use the wand to select <code>pos1</code> and <code>pos2</code></li>
-                                    <li>Run <code>/kothar select &lt;name&gt;</code> again to <strong>save and exit</strong></li>
-                                </ul>
-                            </li>
-                            <li>Start:
-                                <ul>
-                                    <li><code>/kothar start &lt;name&gt;</code></li>
-                                </ul>
-                            </li>
-                        </ol>
-
-                        <h2>OVERLOAD Setup (4 Zones)</h2>
-                        <ol>
-                            <li>Ensure KOTH is configured to OVERLOAD (via GUI/editor).</li>
-                            <li>Enter overload edit mode:
-                                <ul>
-                                    <li><code>/kothar select &lt;name&gt;</code></li>
-                                    <li>This will instruct you about 4 zones.</li>
-                                </ul>
-                            </li>
-                            <li>Select region and set each color:
-                                <ul>
-                                    <li><code>/kothar setzone &lt;name&gt; RED</code></li>
-                                    <li><code>/kothar setzone &lt;name&gt; BLUE</code></li>
-                                    <li><code>/kothar setzone &lt;name&gt; GREEN</code></li>
-                                    <li><code>/kothar setzone &lt;name&gt; YELLOW</code></li>
-                                </ul>
-                            </li>
-                        </ol>
-
-                        <hr>
-
-                        <h1 id="commands">Commands</h1>
-
-                        <h2>Main command</h2>
-                        <ul>
-                            <li><code>/kothar &lt;subcommand&gt;</code></li>
-                        </ul>
-
-                        <h2>Player Commands</h2>
-                        <ul>
-                            <li><strong>help</strong>
-                                <ul>
-                                    <li><code>/kothar help</code></li>
-                                </ul>
-                            </li>
-                            <li><strong>list</strong>
-                                <ul>
-                                    <li><code>/kothar list</code></li>
-                                </ul>
-                            </li>
-                            <li><strong>info</strong>
-                                <ul>
-                                    <li><code>/kothar info &lt;name&gt;</code></li>
-                                </ul>
-                            </li>
-                            <li><strong>top</strong>
-                                <ul>
-                                    <li><code>/kothar top [wins|captures|coins|xp]</code></li>
-                                </ul>
-                            </li>
-                            <li><strong>shop</strong>
-                                <ul>
-                                    <li><code>/kothar shop</code></li>
-                                </ul>
-                            </li>
-                            <li><strong>rank</strong>
-                                <ul>
-                                    <li><code>/kothar rank</code></li>
-                                </ul>
-                            </li>
-                            <li><strong>balance</strong>
-                                <ul>
-                                    <li><code>/kothar balance</code></li>
-                                </ul>
-                            </li>
-                            <li><strong>pay</strong>
-                                <ul>
-                                    <li><code>/kothar pay &lt;player&gt; &lt;amount&gt;</code></li>
-                                </ul>
-                            </li>
-                            <li><strong>playtime</strong>
-                                <ul>
-                                    <li><code>/kothar playtime [player]</code> (Anti-Randy)</li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                        <h2>Admin Commands</h2>
-                        <ul>
-                            <li><strong>create</strong>
-                                <ul>
-                                    <li><code>/kothar create &lt;name&gt;</code></li>
-                                </ul>
-                            </li>
-                            <li><strong>delete</strong>
-                                <ul>
-                                    <li><code>/kothar delete &lt;name&gt;</code></li>
-                                </ul>
-                            </li>
-                            <li><strong>start</strong>
-                                <ul>
-                                    <li><code>/kothar start &lt;name&gt;</code></li>
-                                </ul>
-                            </li>
-                            <li><strong>stop</strong>
-                                <ul>
-                                    <li><code>/kothar stop &lt;name&gt;</code></li>
-                                </ul>
-                            </li>
-                            <li><strong>select</strong>
-                                <ul>
-                                    <li><code>/kothar select &lt;name&gt;</code></li>
-                                </ul>
-                                <p>Classic: select pos1/pos2 and re-run to save.</p>
-                                <p>Overload: enters overload instructions.</p>
-                            </li>
-                            <li><strong>setzone</strong>
-                                <ul>
-                                    <li><code>/kothar setzone &lt;name&gt; &lt;RED|BLUE|GREEN|YELLOW&gt;</code></li>
-                                </ul>
-                            </li>
-                            <li><strong>reload</strong>
-                                <ul>
-                                    <li><code>/kothar reload</code></li>
-                                </ul>
-                            </li>
-                            <li><strong>update</strong>
-                                <ul>
-                                    <li><code>/kothar update</code></li>
-                                </ul>
-                            </li>
-                            <li><strong>coins</strong>
-                                <ul>
-                                    <li><code>/kothar coins &lt;give|take|set&gt; &lt;player&gt; &lt;amount&gt;</code></li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                        <hr>
-
-                        <h1 id="permissions">Permissions</h1>
-                        <h2>Admin</h2>
-                        <ul>
-                            <li><code>kothar.admin</code></li>
-                        </ul>
-                        <p>Grants:</p>
-                        <ul>
-                            <li><code>kothar.admin.create</code></li>
-                            <li><code>kothar.admin.delete</code></li>
-                            <li><code>kothar.admin.start</code></li>
-                            <li><code>kothar.admin.stop</code></li>
-                            <li><code>kothar.admin.select</code></li>
-                            <li><code>kothar.admin.reload</code></li>
-                            <li><code>kothar.admin.gui</code></li>
-                            <li><code>kothar.admin.list</code></li>
-                            <li><code>kothar.admin.setzone</code></li>
-                        </ul>
-                        <p>Additional admin perms:</p>
-                        <ul>
-                            <li><code>kothar.admin.update</code></li>
-                            <li><code>kothar.admin.coins</code></li>
-                        </ul>
-
-                        <h2>Player</h2>
-                        <ul>
-                            <li><code>kothar.top</code></li>
-                            <li><code>kothar.info</code></li>
-                            <li><code>kothar.command.shop</code></li>
-                            <li><code>kothar.command.rank</code></li>
-                            <li><code>kothar.command.balance</code></li>
-                            <li><code>kothar.command.pay</code></li>
-                        </ul>
-
-                        <h2>Anti-Randy bypass</h2>
-                        <ul>
-                            <li><code>kothar.bypass.antirandys</code></li>
-                        </ul>
-
-                        <hr>
-
-                        <h1 id="configuration">Configuration</h1>
-                        <p>Kothar configuration files live in:</p>
-                        <ul>
-                            <li><code>plugins/Kothar/config.yml</code></li>
-                            <li><code>plugins/Kothar/database.yml</code></li>
-                            <li><code>plugins/Kothar/ranks.yml</code></li>
-                            <li><code>plugins/Kothar/shops.yml</code></li>
-                            <li><code>plugins/Kothar/webhook.yml</code></li>
-                            <li><code>plugins/Kothar/langs/messages_&lt;lang&gt;.yml</code></li>
-                        </ul>
-
-                        <hr>
-
-                        <h1 id="koth-setup">KOTH Setup</h1>
-                        <h2>Classic KOTH</h2>
-                        <ol>
-                            <li><code>/kothar create &lt;name&gt;</code></li>
-                            <li><code>/kothar select &lt;name&gt;</code></li>
-                            <li>Select pos1/pos2 with the wand</li>
-                            <li><code>/kothar select &lt;name&gt;</code> again to save</li>
-                            <li><code>/kothar start &lt;name&gt;</code></li>
-                        </ol>
-                        <h2>OVERLOAD KOTH</h2>
-                        <p>Requires 4 zones: RED, BLUE, GREEN, YELLOW</p>
-                        <ol>
-                            <li>Put the KOTH into OVERLOAD mode (GUI/editor).</li>
-                            <li><code>/kothar select &lt;name&gt;</code> (shows instructions)</li>
-                            <li>Select a region and apply:
-                                <ul>
-                                    <li><code>/kothar setzone &lt;name&gt; RED</code></li>
-                                    <li><code>/kothar setzone &lt;name&gt; BLUE</code></li>
-                                    <li><code>/kothar setzone &lt;name&gt; GREEN</code></li>
-                                    <li><code>/kothar setzone &lt;name&gt; YELLOW</code></li>
-                                </ul>
-                            </li>
-                        </ol>
-
-                        <hr>
-
-                        <h1 id="koth-files-koths-folder">KOTH Files (koths folder)</h1>
-                        <p>Kothar stores each arena as a YAML file inside:</p>
-                        <ul>
-                            <li><code>plugins/Kothar/koths/</code></li>
-                        </ul>
-                        <p>Each file is named:</p>
-                        <ul>
-                            <li><code>&lt;kothName&gt;.yml</code></li>
-                        </ul>
-                        <p>After editing a file, run:</p>
-                        <ul>
-                            <li><code>/kothar reload</code></li>
-                        </ul>
-
-                        <hr>
-
-                        <h1 id="economy-xp--coins">Economy (XP &amp; Coins)</h1>
-                        <p>Kothar includes a built-in economy:</p>
-                        <ul>
-                            <li><strong>XP</strong> (used for ranks)</li>
-                            <li><strong>Coins</strong> (used for shop &amp; player trading)</li>
-                        </ul>
-                        <h2>Rewards</h2>
-                        <p>Configured in <code>config.yml</code>:</p>
-                        <ul>
-                            <li>Kill rewards</li>
-                            <li>Win rewards</li>
-                            <li>Capture tick rewards</li>
-                            <li>Death penalties</li>
-                        </ul>
-                        <h2>Player trading</h2>
-                        <ul>
-                            <li><code>/kothar pay &lt;player&gt; &lt;amount&gt;</code></li>
-                        </ul>
-
-                        <hr>
-
-                        <h1 id="ranks">Ranks</h1>
-                        <p>Ranks are defined in <code>ranks.yml</code>. Players progress based on XP.</p>
-                        <h2>Commands</h2>
-                        <ul>
-                            <li><code>/kothar rank</code></li>
-                        </ul>
-                        <h2>Rank rewards</h2>
-                        <p>Use <code>rewards</code> commands in <code>ranks.yml</code>. Use <code>{player}</code> placeholder.</p>
-
-                        <hr>
-
-                        <h1 id="shop">Shop</h1>
-                        <p>Kothar includes a GUI shop driven by <code>shops.yml</code>.</p>
-                        <h2>Command</h2>
-                        <ul>
-                            <li><code>/kothar shop</code></li>
-                        </ul>
-                        <h2>Currency</h2>
-                        <p>Uses <code>coin-name</code> from <code>config.yml</code>.</p>
-                        <h2>Notes</h2>
-                        <ul>
-                            <li>Shop items execute console commands from <code>shops.yml</code>.</li>
-                            <li>Make sure your commands are valid for your server version and plugins.</li>
-                        </ul>
-
-                        <hr>
-
-                        <h1 id="leaderboards">Leaderboards</h1>
-                        <h2>Command</h2>
-                        <ul>
-                            <li><code>/kothar top [wins|captures|coins|xp]</code></li>
-                        </ul>
-
-                        <hr>
-
-                        <h1 id="displays-bossbarscoreboardhologramwaypoints">Displays (BossBar/Scoreboard/Hologram/Waypoints)</h1>
-                        <h2>BossBar</h2>
-                        <p>Configured in <code>config.yml</code> under <code>display.bossbar</code>.</p>
-                        <p>Supports placeholders:</p>
-                        <ul>
-                            <li><code>{koth}</code>, <code>{capturer}</code>, <code>{time}</code>, <code>{location}</code>, <code>{progress}</code></li>
-                        </ul>
-                        <h2>Scoreboard</h2>
-                        <p>Configured in <code>config.yml</code> under <code>display.scoreboard</code>.</p>
-                        <p>Two line sets:</p>
-                        <ul>
-                            <li><code>lines-active</code></li>
-                            <li><code>lines-overload</code></li>
-                        </ul>
-                        <h2>Hologram</h2>
-                        <p>Configured in <code>config.yml</code> under <code>display.hologram</code>.</p>
-                        <h2>Waypoints</h2>
-                        <p>Configured in <code>config.yml</code> under <code>display.waypoints</code>.</p>
-
-                        <hr>
-
-                        <h1 id="discord-webhook">Discord Webhook</h1>
-                        <p>Configure <code>webhook.yml</code>.</p>
-                        <h2>Features</h2>
-                        <ul>
-                            <li>Event embeds</li>
-                            <li>Optional leaderboard posting</li>
-                            <li>Rate limiting</li>
-                        </ul>
-                        <p>Common placeholders:</p>
-                        <ul>
-                            <li><code>{koth}</code></li>
-                            <li><code>{location}</code></li>
-                            <li><code>{time}</code></li>
-                            <li><code>{winner}</code></li>
-                            <li><code>{points}</code></li>
-                            <li><code>{mode}</code></li>
-                            <li><code>{duration}</code></li>
-                            <li><code>{progress}</code></li>
-                        </ul>
-
-                        <hr>
-
-                        <h1 id="update-system">Update System</h1>
-                        <h2>Command</h2>
-                        <ul>
-                            <li><code>/kothar update</code></li>
-                        </ul>
-                        <p>Downloads the latest <code>.jar</code> from GitHub Releases.</p>
-                        <h2>GitHub API Authentication (optional)</h2>
-                        <p>If your repository is private or you hit API limitations, set an env var:</p>
-                        <ul>
-                            <li><code>GITHUB_TOKEN</code></li>
-                        </ul>
-                        <p>Then restart the server and retry <code>/kothar update</code>.</p>
-
-                        <hr>
-
-                        <h1 id="placeholders">Placeholders</h1>
-                        <p>Common placeholders:</p>
-                        <ul>
-                            <li><code>{player}</code></li>
-                            <li><code>{koth}</code></li>
-                            <li><code>{time}</code></li>
-                            <li><code>{location}</code> -&gt; formatted <code>X, Z</code></li>
-                            <li><code>{capturer}</code></li>
-                            <li><code>{winner}</code></li>
-                            <li><code>{progress}</code></li>
-                            <li><code>{points}</code></li>
-                            <li><code>{team}</code></li>
-                        </ul>
-
-                        <hr>
-
-                        <h1 id="troubleshooting">Troubleshooting</h1>
-                        <h2>“This command can only be executed by a player”</h2>
-                        <p>You ran a player-only command from console. Use in-game.</p>
-                        <h2>“Not enough players online…”</h2>
-                        <p>Your KOTH has <code>min-players</code> &gt; online players.</p>
-                        <h2>“KOTH is not properly configured”</h2>
-                        <p>You must configure the zone/spawn/settings via GUI or selection.</p>
-                        <h2>Shop purchases do nothing</h2>
-                        <ul>
-                            <li>Check console for command errors from <code>shops.yml</code>.</li>
-                            <li>Validate material names and command syntax.</li>
-                        </ul>
-                        <h2>Update command returns 404 / fails</h2>
-                        <ul>
-                            <li>Verify repo settings and that a release exists.</li>
-                            <li>If private repo: set <code>GITHUB_TOKEN</code>.</li>
-                        </ul>
-                        <h2>Coins command fails for offline players</h2>
-                        <p>If you run an offline-mode server, UUID resolution may differ from Mojang UUIDs.</p>
-
-                        <hr>
-
-                        <h1 id="developer-api">Developer API</h1>
-                        <p>Kothar exposes an API and events.</p>
-                        <h2>Events</h2>
-                        <ul>
-                            <li><code>KotharStartEvent</code></li>
-                            <li><code>KotharEndEvent</code></li>
-                            <li><code>KotharStopEvent</code></li>
-                            <li><code>KotharCaptureEvent</code></li>
-                            <li><code>KotharWinEvent</code></li>
-                        </ul>
-                        <h2>Main access</h2>
-                        <ul>
-                            <li><code>Kothar.getAPI()</code> (if available)</li>
-                            <li><code>Kothar.getInstance()</code></li>
-                        </ul>
-                        <h2>Listening to Events</h2>
-                        <p>Subscribe using Bukkit listeners to react when KOTH starts/ends/wins.</p>
-                    </div>
+        <section id="home" class="hero">
+            <img src="https://github.com/marwannull.png" alt="Avatar" class="avatar">
+            <h1><span data-en="Hi, I'm Marwan" data-es="Hola, soy Marwan">Hi, I'm Marwan</span> - <span class="highlight">Java Developer</span></h1>
+            <p data-en="I build ready-to-use plugins that improve server performance and player experience." data-es="Creo plugins listos para usar que mejoran el rendimiento del servidor y la experiencia del jugador.">I build ready-to-use plugins that improve server performance and player experience.</p>
+            <a href="#projects" class="btn" data-en="View Projects" data-es="Ver Proyectos">View Projects</a>
+            <div class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <div class="arrow">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
             </div>
+        </section>
+
+        <section id="about" class="section fade-in">
+            <h2 data-en="About Me" data-es="Sobre Mí">About Me</h2>
+            <p data-en="I'm a Java developer specializing in high-performance Minecraft plugins. With 3 years of experience and 1 plugins published on BuiltByBit, I focus on creating clean, efficient code that server owners love. My plugins are designed to be lightweight, configurable, and compatible with the latest Minecraft versions." data-es="Soy un desarrollador de Java especializado en plugins de Minecraft de alto rendimiento. Con 3 años de experiencia y 1 plugin publicado en BuiltByBit, me enfoco en crear código limpio y eficiente que a los dueños de servidores les encanta. Mis plugins están diseñados para ser ligeros, configurables y compatibles con las últimas versiones de Minecraft.">I'm a Java developer specializing in high-performance Minecraft plugins. With 3 years of experience and 1 plugins published on BuiltByBit, I focus on creating clean, efficient code that server owners love. My plugins are designed to be lightweight, configurable, and compatible with the latest Minecraft versions.</p>
+        </section>
+
+        <section id="projects" class="section fade-in">
+            <h2 data-en="Projects" data-es="Proyectos">Projects</h2>
+            <div class="projects-layout">
+                <div class="projects-left">
+                    <div class="grid">
+                                                <div class="card scroll-animate">
+                            <div class="card-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"></path>
+                                </svg>
+                            </div>
+                            <h3>Kothar</h3>
+                            <p data-en="The next-generation King of The Hill plugin." data-es="El plugin King of The Hill de próxima generación.">The next-generation King of The Hill plugin.</p>
+                            <div class="card-footer-group">
+                                <div class="card-meta">&nbsp;</div>
+                                <div class="card-actions">
+                                    <a href="#" class="btn-small open-modal" data-name="Kothar" data-spigot="https://www.spigotmc.org/resources/kothar-the-next-generation-king-of-the-hill-plugin-%E2%9A%94%EF%B8%8F.132669/" data-modrinth="https://modrinth.com/plugin/kothar" data-builtbybit="https://builtbybit.com/resources/kothar.94414/" data-polymart="https://polymart.org/product/9367/kothar" data-en="Visit Plugin" data-es="Visitar Plugin">Visit Plugin</a>
+                                    <a href="wiki/index.html" class="btn-small" target="_blank" data-en="Visit Wiki" data-es="Visitar Wiki">Visit Wiki</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <h2 data-en="Contact" data-es="Contacto">Contact</h2>
+            <p data-en="Stay updated on new plugins, get support, and connect with other people." data-es="Mantente actualizado sobre nuevos plugins, obtén soporte y conéctate con otras personas.">Stay updated on new plugins, get support, and connect with other people.</p>
+            <a href="https://discord.gg/BewvqAe3jb" class="btn" data-en="Join Discord" data-es="Unirse a Discord">Join Discord</a>
         </section>
 
         <footer>
@@ -535,6 +92,20 @@
         </footer>
     </div>
 
-    <script src="../script.js"></script>
+    <div id="pluginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 id="modalTitle">Plugin Name</h3>
+            <p data-en="Choose a platform to download:" data-es="Elige una plataforma para descargar:">Choose a platform to download:</p>
+            <div class="modal-buttons">
+                <a href="#" id="btn-spigot" target="_blank" class="platform-btn"><img src="assets/spigotmc.png" alt="SpigotMC" class="platform-icon"> SpigotMC</a>
+                <a href="#" id="btn-modrinth" target="_blank" class="platform-btn"><img src="assets/modrinth.png" alt="Modrinth" class="platform-icon"> Modrinth</a>
+                <a href="#" id="btn-builtbybit" target="_blank" class="platform-btn"><img src="assets/builtbybit.png" alt="BuiltByBit" class="platform-icon"> BuiltByBit</a>
+                <a href="#" id="btn-polymart" target="_blank" class="platform-btn"><img src="assets/polymart.png" alt="Polymart" class="platform-icon"> Polymart</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+
     const modal = document.getElementById('pluginModal');
 
     function setupBtn(element, url) {
@@ -6,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!url || url === '#') {
             element.style.display = 'none';
         } else {
-            element.style.display = 'block';
+            element.style.display = 'flex';
             element.href = url;
         }
     }
@@ -50,15 +51,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         window.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal();
-            }
+            if (e.target === modal) closeModal();
         });
 
         window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.classList.contains('show')) {
-                closeModal();
-            }
+            if (e.key === 'Escape' && modal.classList.contains('show')) closeModal();
         });
     }
 
@@ -71,7 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
             langOptions.forEach(opt => {
                 opt.classList.toggle('active', opt.getAttribute('data-lang') === lang);
             });
-
             document.querySelectorAll('[data-' + lang + ']').forEach(el => {
                 el.textContent = el.getAttribute('data-' + lang);
             });
@@ -118,20 +114,86 @@ document.addEventListener('DOMContentLoaded', () => {
         updateTheme();
     }
 
-    const observerOptions = {
-        threshold: 0.1
-    };
-
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.1 });
 
     document.querySelectorAll('.fade-in, .scroll-animate').forEach(el => {
         observer.observe(el);
+    });
+
+    const progressBar = document.getElementById('readingProgress');
+    if (progressBar) {
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            progressBar.style.width = Math.min(progress, 100) + '%';
+        }, { passive: true });
+    }
+
+    const docsLinks = document.querySelectorAll('.wiki-sidebar .docs-link');
+    if (docsLinks.length) {
+        const sections = [];
+        docsLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                const target = document.getElementById(href.substring(1));
+                if (target) {
+                    sections.push({ link, target });
+                }
+            }
+        });
+
+        if (sections.length) {
+            let ticking = false;
+
+            function updateActiveLink() {
+                const scrollPos = window.scrollY + 120;
+                let activeSection = sections[0];
+
+                for (const section of sections) {
+                    if (section.target.offsetTop <= scrollPos) {
+                        activeSection = section;
+                    }
+                }
+
+                docsLinks.forEach(l => l.classList.remove('active'));
+                if (activeSection) {
+                    activeSection.link.classList.add('active');
+                }
+                ticking = false;
+            }
+
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(updateActiveLink);
+                    ticking = true;
+                }
+            }, { passive: true });
+
+            updateActiveLink();
+        }
+    }
+
+    document.querySelectorAll('.docs-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
+                const target = document.getElementById(href.substring(1));
+                if (target) {
+                    const headerOffset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.scrollY - headerOffset;
+                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                }
+            }
+        });
     });
 
     const faviconImg = new Image();

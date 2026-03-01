@@ -7,6 +7,7 @@
     <link rel="icon" href="https://github.com/marwannull.png" type="image/png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap">
 </head>
 <body>
     
@@ -16,7 +17,7 @@
             <nav>
                 <ul>
                     <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
-                    <li><a href="#about"><i class="fas fa-user"></i> About Me</a></li>
+                    <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
                     <li><a href="#projects"><i class="fas fa-code"></i> Projects</a></li>
                     <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
                 </ul>
@@ -34,8 +35,15 @@
         </header>
 
         <section id="home" class="hero">
-            <img src="https://github.com/marwannull.png" alt="Avatar" class="avatar">
-            <h1><span data-en="Hi, I'm Marwan" data-es="Hola, soy Marwan">Hi, I'm Marwan</span> - <span class="highlight">Java Developer</span></h1>
+            <div class="hero-tag">
+                <span class="dot"></span>
+                <span data-en="Available for projects" data-es="Disponible para proyectos">Available for projects</span>
+            </div>
+            <div class="avatar-wrapper">
+                <img src="https://github.com/marwannull.png" alt="Avatar" class="avatar">
+            </div>
+            <h1><span data-en="Hi, I'm Marwan" data-es="Hola, soy Marwan">Hi, I'm Marwan</span></h1>
+            <h1 style="margin-top: -10px;"><span class="highlight">Java Developer</span></h1>
             <p data-en="I build ready-to-use plugins that improve server performance and player experience." data-es="Creo plugins listos para usar que mejoran el rendimiento del servidor y la experiencia del jugador.">I build ready-to-use plugins that improve server performance and player experience.</p>
             <a href="#projects" class="btn" data-en="View Projects" data-es="Ver Proyectos">View Projects</a>
             <div class="scroll-indicator">
@@ -51,40 +59,57 @@
         </section>
 
         <section id="about" class="section fade-in">
-            <h2 data-en="About Me" data-es="Sobre Mí">About Me</h2>
-            <p data-en="I'm a Java developer specializing in high-performance Minecraft plugins. With 3 years of experience and 1 plugins published on BuiltByBit, I focus on creating clean, efficient code that server owners love. My plugins are designed to be lightweight, configurable, and compatible with the latest Minecraft versions." data-es="Soy un desarrollador de Java especializado en plugins de Minecraft de alto rendimiento. Con 3 años de experiencia y 1 plugin publicado en BuiltByBit, me enfoco en crear código limpio y eficiente que a los dueños de servidores les encanta. Mis plugins están diseñados para ser ligeros, configurables y compatibles con las últimas versiones de Minecraft.">I'm a Java developer specializing in high-performance Minecraft plugins. With 3 years of experience and 1 plugins published on BuiltByBit, I focus on creating clean, efficient code that server owners love. My plugins are designed to be lightweight, configurable, and compatible with the latest Minecraft versions.</p>
+            <span class="section-label" data-en="About Me" data-es="Sobre Mí">About Me</span>
+            <h2 data-en="Who I Am" data-es="Quién Soy">Who I Am</h2>
+            <div class="bento-stats">
+                <div class="stat-card scroll-animate">
+                    <div class="stat-value">3+</div>
+                    <div class="stat-label" data-en="Years" data-es="Años">Years</div>
+                </div>
+                <div class="stat-card scroll-animate">
+                    <div class="stat-value">1</div>
+                    <div class="stat-label">Plugin</div>
+                </div>
+                <div class="stat-card scroll-animate">
+                    <div class="stat-value"><i class="fab fa-java" style="font-size: 1.6rem;"></i></div>
+                    <div class="stat-label">Java</div>
+                </div>
+            </div>
+            <p data-en="I'm a Java developer specializing in high-performance Minecraft plugins. With 3 years of experience and 1 plugin published on BuiltByBit, I focus on creating clean, efficient code that server owners love. My plugins are designed to be lightweight, configurable, and compatible with the latest Minecraft versions." data-es="Soy un desarrollador de Java especializado en plugins de Minecraft de alto rendimiento. Con 3 años de experiencia y 1 plugin publicado en BuiltByBit, me enfoco en crear código limpio y eficiente que a los dueños de servidores les encanta. Mis plugins están diseñados para ser ligeros, configurables y compatibles con las últimas versiones de Minecraft.">I'm a Java developer specializing in high-performance Minecraft plugins. With 3 years of experience and 1 plugin published on BuiltByBit, I focus on creating clean, efficient code that server owners love. My plugins are designed to be lightweight, configurable, and compatible with the latest Minecraft versions.</p>
         </section>
 
         <section id="projects" class="section fade-in">
+            <span class="section-label" data-en="My Work" data-es="Mi Trabajo">My Work</span>
             <h2 data-en="Projects" data-es="Proyectos">Projects</h2>
             <div class="projects-layout">
                 <div class="projects-left">
                     <div class="grid">
-                                                <div class="card scroll-animate">
+                        <div class="card scroll-animate">
                             <div class="card-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"></path>
                                 </svg>
                             </div>
                             <h3>Kothar</h3>
-                            <p data-en="The next-generation King of The Hill plugin." data-es="El plugin King of The Hill de próxima generación.">The next-generation King of The Hill plugin.</p>
+                            <p data-en="The next-generation King of The Hill plugin. Multiple capture modes, built-in economy, ranks, leaderboards, and more." data-es="El plugin King of The Hill de próxima generación. Múltiples modos de captura, economía integrada, rangos, tablas de clasificación y más.">The next-generation King of The Hill plugin. Multiple capture modes, built-in economy, ranks, leaderboards, and more.</p>
                             <div class="card-footer-group">
                                 <div class="card-meta">&nbsp;</div>
                                 <div class="card-actions">
-                                    <a href="#" class="btn-small open-modal" data-name="Kothar" data-spigot="https://www.spigotmc.org/resources/kothar-the-next-generation-king-of-the-hill-plugin-%E2%9A%94%EF%B8%8F.132669/" data-modrinth="https://modrinth.com/plugin/kothar" data-builtbybit="https://builtbybit.com/resources/kothar.94414/" data-polymart="https://polymart.org/product/9367/kothar" data-en="Visit Plugin" data-es="Visitar Plugin">Visit Plugin</a>
-                                    <a href="wiki/index.html" class="btn-small" target="_blank" data-en="Visit Wiki" data-es="Visitar Wiki">Visit Wiki</a>
+                                    <a href="#" class="btn-small open-modal" data-name="Kothar" data-spigot="https://www.spigotmc.org/resources/kothar-the-next-generation-king-of-the-hill-plugin-%E2%9A%94%EF%B8%8F.132669/" data-modrinth="https://modrinth.com/plugin/kothar" data-builtbybit="https://builtbybit.com/resources/kothar.94414/" data-polymart="https://polymart.org/product/9367/kothar" data-en="Download" data-es="Descargar"><i class="fas fa-download"></i> Download</a>
+                                    <a href="wiki/index.html" class="btn-small" target="_blank" data-en="Wiki" data-es="Wiki"><i class="fas fa-book"></i> Wiki</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                            </div>
+            </div>
         </section>
 
-        <section id="contact" class="section">
-            <h2 data-en="Contact" data-es="Contacto">Contact</h2>
+        <section id="contact" class="section-cta fade-in">
+            <span class="section-label" data-en="Get in Touch" data-es="Ponte en Contacto">Get in Touch</span>
+            <h2 data-en="Join the Community" data-es="Únete a la Comunidad">Join the Community</h2>
             <p data-en="Stay updated on new plugins, get support, and connect with other people." data-es="Mantente actualizado sobre nuevos plugins, obtén soporte y conéctate con otras personas.">Stay updated on new plugins, get support, and connect with other people.</p>
-            <a href="https://discord.gg/BewvqAe3jb" class="btn" data-en="Join Discord" data-es="Unirse a Discord">Join Discord</a>
+            <a href="https://discord.gg/BewvqAe3jb" class="btn" data-en="Join Discord" data-es="Unirse a Discord"><i class="fab fa-discord"></i> Join Discord</a>
         </section>
 
         <footer>

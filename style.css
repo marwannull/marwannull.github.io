@@ -535,6 +535,12 @@ nav a:hover::after {
     align-items: center;
     opacity: 0.5;
     transition: opacity var(--transition-base);
+    gap: var(--space-lg);
+}
+
+.scroll-indicator .btn {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .scroll-indicator:hover {
@@ -935,10 +941,11 @@ footer p {
 
 .wiki-layout {
     display: grid;
-    grid-template-columns: 260px 1fr;
+    grid-template-columns: 280px 1fr;
     gap: var(--space-xl);
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 100%;
+    max-width: none;
+    margin: 0;
     padding: calc(64px + var(--space-xl)) var(--space-xl) var(--space-xl);
     min-height: 100vh;
     align-items: start;
@@ -947,9 +954,10 @@ footer p {
 .wiki-sidebar {
     position: sticky;
     top: calc(64px + var(--space-lg));
+    align-self: start;
     background: var(--bg-card);
     border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-lg);
+    border-radius: 0;
     padding: var(--space-lg);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -1001,14 +1009,18 @@ footer p {
 }
 
 .wiki-content {
-    background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-lg);
-    padding: var(--space-xl) var(--space-2xl);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0 var(--space-xl) 0 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
     text-align: left;
     min-height: 80vh;
+}
+
+.wiki-content > * {
+    max-width: 980px;
 }
 
 .wiki-content h1 {
@@ -1146,10 +1158,11 @@ footer p {
     .wiki-sidebar {
         position: static;
         max-height: none;
+        border-radius: var(--radius-lg);
     }
 
     .wiki-content {
-        padding: var(--space-lg);
+        padding: 0;
     }
 
     .projects-layout {
